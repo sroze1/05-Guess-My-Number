@@ -3,42 +3,48 @@ console.log(document.querySelector('.message').textContent);
 
 // document.querySelector('.message').textContent = 'Tatta!';
 
-
-document.querySelector('.guess').value = 23;
 console.log(document.querySelector('.guess').value);
 
 const randomNumber = Math.trunc(Math.random() * 20) + 1;
 
-let score = Number(document.querySelector('.score').textContent);
+// let score = Number(document.querySelector('.score').textContent);
+let score = 20;
 
 document.querySelector('.number').textContent = '?';
 
 document.querySelector('.check').addEventListener('click', function () {
   const guess = Number(document.querySelector('.guess').value);
-  console.log(guess);
 
-  //Invalid Number
-  if (!guess) {
-    document.querySelector('.message').textContent = 'No number!';
-  }
-  // Correct guess
-  else if (guess === randomNumber) {
-    document.querySelector('.message').textContent = 'Correct number, you win!';
-    document.querySelector('.number').textContent = randomNumber;
-    document.querySelector('body').style.backgroundColor = 'green';
-    document.querySelector('.highscore').textContent = score;
-  }
-  // Guess is higher than number
-  else if (guess > randomNumber) {
-    document.querySelector('.message').textContent =
-      'The hidden number is lower g';
-    document.querySelector('.score').textContent = score--;
-  }
-  // Guess is lower than number
-  else if (guess < randomNumber) {
-    document.querySelector('.message').textContent =
-      'The hidden number is higher g';
-    document.querySelector('.score').textContent = score = score - 1;
+  if (score > 1) {
+    //Invalid Number
+    if (!guess) {
+      document.querySelector('.message').textContent = 'No number!';
+    }
+    // Correct guess
+    else if (guess === randomNumber) {
+      document.querySelector('.message').textContent =
+        'Correct number, you win!';
+      document.querySelector('.number').textContent = randomNumber;
+      document.querySelector('body').style.backgroundColor = 'green';
+      document.querySelector('.highscore').textContent = score;
+    }
+    // Guess is higher than number
+    else if (guess > randomNumber) {
+      score--;
+      document.querySelector('.message').textContent =
+        'The hidden number is lower g';
+      document.querySelector('.score').textContent = score;
+    }
+    // Guess is lower than number
+    else if (guess < randomNumber) {
+      score--;
+      document.querySelector('.message').textContent =
+        'The hidden number is higher g';
+      document.querySelector('.score').textContent = score;
+    }
+  } else {
+    document.querySelector('.message').textContent = 'Bounce G You lost!';
+    document.querySelector('.score').textContent = 0;
   }
 });
 
