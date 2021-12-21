@@ -21,6 +21,7 @@ document.querySelector('.check').addEventListener('click', function () {
     if (!guess) {
       document.querySelector('.message').textContent = 'No number!';
     }
+    
     // When correct guess
     else if (guess === randomNumber) {
       document.querySelector('.message').textContent =
@@ -33,20 +34,30 @@ document.querySelector('.check').addEventListener('click', function () {
         document.querySelector('.highscore').textContent = highscore;
       }
     }
-    // When guess is higher than number
-    else if (guess > randomNumber) {
+
+    // When guess is not equal to the number.. perform ternary operator. 
+    else if(guess !== randomNumber) { 
+       if (score > 1) {
       score--;
       document.querySelector('.message').textContent =
-        'The hidden number is lower g';
+       guess < randomNumber ? 'The hidden number is higher g' : 'The hidden number is lower g';
       document.querySelector('.score').textContent = score;
     }
-    // When guess is lower than number
-    else if (guess < randomNumber) {
-      score--;
-      document.querySelector('.message').textContent =
-        'The hidden number is higher g';
-      document.querySelector('.score').textContent = score;
     }
+    
+    // else if (guess > randomNumber) {
+    //   score--;
+    //   document.querySelector('.message').textContent =
+    //     'The hidden number is lower g';
+    //   document.querySelector('.score').textContent = score;
+    // }
+    // // When guess is lower than number
+    // else if (guess < randomNumber) {
+    //   score--;
+    //   document.querySelector('.message').textContent =
+    //     'The hidden number is higher g';
+    //   document.querySelector('.score').textContent = score;
+    // }
 
     // When the score hits 0
   } else {
@@ -54,6 +65,8 @@ document.querySelector('.check').addEventListener('click', function () {
     document.querySelector('.score').textContent = 0;
   }
 });
+
+
 
 ///////////////////////////////////////////
 ///////////////////////////////////////////
@@ -72,6 +85,8 @@ document.querySelector('.again').addEventListener('click', function () {
   // Reset the width of the number:
   document.querySelector('.number').style.width = '15rem';
 
+  // Reset the guess of the user:
+  document.querySelector('.guess').value = "";
 
   // Reset the score
   score = 20;
